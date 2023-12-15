@@ -5,11 +5,14 @@ use image::load_from_memory;
 
 #[wasm_bindgen]
 pub fn grayscale(encoded_file: &str) {
-    log(&"Greyscale called".into());
+    log(&"Grayscale called".into());
 
     let base64_to_vector = decode(encoded_file).unwrap();
     log(&"Image decoded".into());
 
-    let img = load_from_memory(&base64_to_vector).unwrap();
+    let mut img = load_from_memory(&base64_to_vector).unwrap();
     log(&"Image loaded".into())
+
+    img = img.grayscale();
+    log(&"Grayscale effect applied")
 }
